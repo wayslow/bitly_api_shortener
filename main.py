@@ -1,8 +1,10 @@
 import os
+from dotenv import load_dotenv
 import requests
 
-
 from urllib.parse import urlparse
+
+load_dotenv()
 
 BITLY_API_TOKEN = os.getenv['BITLY_API_TOKEN']
 
