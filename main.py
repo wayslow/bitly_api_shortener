@@ -4,9 +4,6 @@ import requests
 
 from urllib.parse import urlparse
 
-load_dotenv()
-
-BITLY_API_TOKEN = os.getenv['BITLY_API_TOKEN']
 
 
 def shorten_link(url, headers):
@@ -32,7 +29,9 @@ def is_bitlink(url, headers):
 
 
 def main():
-    headers = {'Authorization': "Bearer {}".format(BITLY_API_TOKEN)}
+    load_dotenv()
+    api_token = os.getenv('TOKEN')
+    headers = {'Authorization': "Bearer {}".format(api_token)}
     url = input("введите ссылку ")
     parse = urlparse(url)
     parse_url = f'{parse.netloc}{parse.path}'
