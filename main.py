@@ -5,7 +5,6 @@ import requests
 from urllib.parse import urlparse
 
 
-
 def shorten_link(url, headers):
     bitly_url = 'https://api-ssl.bitly.com/v4/shorten'
     params = {"long_url": url}
@@ -32,9 +31,9 @@ def main():
     load_dotenv()
     bitly_api_token = os.getenv('BITLY_API_TOKEN')
     headers = {'Authorization': "Bearer {}".format(bitly_api_token)}
-    url = input("введите ссылку ")
-    parse = urlparse(url)
-    parse_url = f'{parse.netloc}{parse.path}'
+    user_url = input("введите ссылку ")
+    parse_user_url = urlparse(user_url)
+    parse_url = f'{parse_user_url.netloc}{parse_user_url.path}'
     try:
         if is_bitlink(parse_url, headers):
             clicks = count_clicks(parse_url, headers)
