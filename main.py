@@ -30,8 +30,8 @@ def is_bitlink(url, headers):
 
 def main():
     load_dotenv()
-    api_token = os.getenv('TOKEN')
-    headers = {'Authorization': "Bearer {}".format(api_token)}
+    bitly_api_token = os.getenv('BITLY_API_TOKEN')
+    headers = {'Authorization': "Bearer {}".format(bitly_api_token)}
     url = input("введите ссылку ")
     parse = urlparse(url)
     parse_url = f'{parse.netloc}{parse.path}'
