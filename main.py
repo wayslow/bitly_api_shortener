@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 import requests
 
 from urllib.parse import urlparse
+import argparse
 
 
 def shorten_link(url, headers):
@@ -31,7 +32,13 @@ def main():
     load_dotenv()
     bitly_api_token = os.getenv('BITLY_API_TOKEN')
     headers = {'Authorization': "Bearer {}".format(bitly_api_token)}
-    user_url = input("введите ссылку ")
+
+    parser = argparse.ArgumentParser(
+        description='Описание что делает программа'
+    )
+    parser.add_argument('url', help='Ваша ссылка')
+    args = parser.parse_args()
+    user_url = args.url
     parse_user_url = urlparse(user_url)
     parse_url = f'{parse_user_url.netloc}{parse_user_url.path}'
     try:
@@ -39,7 +46,7 @@ def main():
             clicks = count_clicks(parse_url, headers)
             print(f"количество кликов:{str(clicks)}")
         else:
-            bitlink = shorten_link(url, headers)
+            bitlink = shorten_link(user_url, headers)
             print(bitlink)
     except requests.exceptions.HTTPError:
         print("нормально ссылку на пиши, чебурек")
