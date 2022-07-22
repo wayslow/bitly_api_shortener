@@ -38,9 +38,8 @@ def main():
     )
     parser.add_argument('url', help='Ваша ссылка')
     args = parser.parse_args()
-    user_url = args.url
-    parse_user_url = urlparse(user_url)
-    parse_url = f'{parse_user_url.netloc}{parse_user_url.path}'
+    componets_user_url = urlparse(args.url)
+    combined_url = f'{componets_user_url.netloc}{componets_user_url.path}'
     try:
         if is_bitlink(parse_url, headers):
             clicks = count_clicks(parse_url, headers)
