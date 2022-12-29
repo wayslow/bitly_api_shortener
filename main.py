@@ -8,7 +8,7 @@ import argparse
 
 def shorten_link(url, headers):
     bitly_url = 'https://api-ssl.bitly.com/v4/shorten'
-    params = {"long_url": url}
+    params = {"long_url":url}
     response = requests.post(bitly_url, json=params, headers=headers)
     response.raise_for_status()
     return response.json()['link']
@@ -40,13 +40,14 @@ def main():
     args = parser.parse_args()
     componets_user_url = urlparse(args.url)
     combined_url = f'{componets_user_url.netloc}{componets_user_url.path}'
+    combined_schem_url = f'https://{componets_user_url.netloc}{componets_user_url.path}'
     try:
-        if is_bitlink(parse_url, headers):
-            clicks = count_clicks(parse_url, headers)
+        if is_bitlink(combined_url, headers):
+            clicks = count_clicks(combined_url, headers)
             print(f"количество кликов:{str(clicks)}")
         else:
-            bitlink = shorten_link(user_url, headers)
-            print(bitlink)
+            bitlink = shorten_link(combined_schem_url, headers)
+            print(f"ваша ссылка: {bitlink}")
     except requests.exceptions.HTTPError:
         print("нормально ссылку на пиши, чебурек")
 
