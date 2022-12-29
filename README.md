@@ -20,7 +20,7 @@ pip install -r requirements.txt
 в данном проекте также используется переменные окружения. Чтобы их объявить необходимо создать фаил .env в корневой папке проекта следующего содержания
 
 ```
-bitly_api_token =*BITLY_API_TOKEN*
+BITLY_API_TOKEN=*BITLY_API_TOKEN*
 ```
 
 для получения bitly токена регистрируемся на сайте [Bitli](https://bit.ly/) после генерируем его по [ссылке](https://app.bitly.com/settings/integrations/)
